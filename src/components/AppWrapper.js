@@ -2,13 +2,11 @@ import React, { Component } from "react"
 
 import GlobalStyle from "../components/styles/GlobalStyles"
 import Navigation from "../components/Navigation"
-import App from "../components/App"
+import App from "./App"
 import base, { firebaseApp } from "../base"
 import firebase from "firebase"
-import Login from "../components/Login"
-import Layout from "../components/layout"
+import Login from "./Login"
 import { navigate } from "gatsby"
-
 class AppWrapper extends Component {
   state = {
     uid: null,
@@ -35,6 +33,7 @@ class AppWrapper extends Component {
       uid: authData.user.uid,
       owner: app.owner || authData.user.uid,
     })
+
     navigate(`/app/${authData.user.uid}`)
   }
 
@@ -65,11 +64,9 @@ class AppWrapper extends Component {
     // if (!this.state.uid) {
     //   return (
     //     <>
-    //       <Layout location={this.props.location}>
-    //         <GlobalStyle />
-    //         {/* <Navigation logout={this.logout} /> */}
-    //         <Login authenticate={this.authenticate} />
-    //       </Layout>
+    //       <GlobalStyle />
+    //       {/* <Navigation logout={this.logout} /> */}
+    //       <Login authenticate={this.authenticate} />
     //     </>
     //   )
     // }
@@ -80,13 +77,11 @@ class AppWrapper extends Component {
     // }
 
     return (
-      <Layout location={this.props.location}>
-        <App
-          logout={this.logout}
-          appId={this.state.uid}
-          history={this.props.history}
-        />
-      </Layout>
+      <App
+        logout={this.logout}
+        appId={this.state.uid}
+        // history={this.props.history}
+      />
     )
   }
 }
